@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Céleste Dining | القائمة النهائية</title>
+    
+    <!-- خطوط فخمة -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:wght@300;400;600&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* ================= المتغيرات ================= */
+        :root {
+            --bg-dark: #0F1115;
+            --card-bg: rgba(30, 30, 30, 0.8);
+            --text-main: #F5F5F5;
+            --text-muted: #B0B0B0;
+            --gold: #C5A059;
+            --border-color: rgba(197, 160, 89, 0.3);
+            
+            --font-head-ar: 'Amiri', serif;
+            --font-head-en: 'Cormorant Garamond', serif;
+            --font-body: 'Tajawal', sans-serif;
+            
+            --transition-fast: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        /* ================= إعدادات أساسية ================= */
+        html { font-size: 16px; scroll-behavior: smooth; scroll-padding-top: 80px; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: var(--font-body);
+            color: var(--text-main);
+            background-color: var(--bg-dark);
+            line-height: 1.6; overflow-x: hidden;
+        }
+        
+        a { text-decoration: none; color: inherit; cursor: pointer; transition: 0.3s; }
+        img { display: block; object-fit: cover; width: 100%; height: 100%; max-width: 100%; }
+
+        /* ================= الخلفية ================= */
+        .bg-wrapper {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: url('https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&q=80&w=2000');
+            background-size: cover; background-position: center; background-attachment: fixed;
+            z-index: -1;
+        }
+        .bg-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, rgba(15,17,21,0.9), rgba(15,17,21,0.96));
+        }
+
+        /* ================= النافبار ================= */
+        nav {
+            position: fixed; top: 0; width: 100%; padding: 10px 4%;
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(15, 17, 21, 0.95); backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--border-color); z-index: 1000;
+            transition: var(--transition-fast);
+        }
+        .brand {
+            font-family: var(--font-head-en);
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            color: var(--gold); font-style: italic; letter-spacing: 1px; white-space: nowrap;
+        }
+        .nav-links { display: flex; gap: 15px; overflow-x: auto; white-space: nowrap; -webkit-overflow-scrolling: touch; padding-bottom: 5px; }
+        .nav-links a { font-size: 0.85rem; color: var(--text-main); text-transform: uppercase; letter-spacing: 1px; transition: var(--transition-fast); padding: 5px 10px; border-radius: 4px; }
+        .nav-links a:hover { color: var(--gold); background: rgba(255,255,255,0.05); }
+        .nav-links::-webkit-scrollbar { height: 4px; }
+        .nav-links::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 10px; }
+
+        /* ================= الهيدر ================= */
+        header {
+            height: 75vh; min-height: 500px;
+            display: flex; align-items: center; justify-content: center;
+            text-align: center; position: relative; z-index: 2; padding: 0 20px;
+        }
+        .hero-title {
+            font-family: var(--font-head-en);
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            color: #fff; margin-bottom: 15px; animation: fadeInDown 0.8s ease;
+        }
+        .hero-sub {
+            font-family: var(--font-head-ar);
+            font-size: clamp(1.2rem, 4vw, 2rem);
+            color: var(--gold); margin-bottom: 30px; animation: fadeInUp 0.8s ease 0.2s backwards;
+        }
+        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* ================= الأقسام ================= */
+        section { padding: clamp(40px, 5vw, 80px) 4%; position: relative; z-index: 2; max-width: 1400px; margin: 0 auto; }
+        .section-header { text-align: center; margin-bottom: clamp(30px, 5vw, 50px); }
+        .section-title {
+            font-family: var(--font-head-ar);
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            color: var(--text-main); display: inline-block;
+            padding-bottom: 10px; border-bottom: 2px solid var(--gold);
+        }
+        .sub-section-title {
+            font-family: var(--font-head-ar);
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            color: var(--gold); margin: 30px 0 15px; padding-right: 15px;
+            border-right: 3px solid var(--gold); display: flex; align-items: center; gap: 10px;
+        }
+
+        /* ================= الشبكة (Grid) ================= */
+        .menu-grid-cards { display: grid; grid-template-columns: 1fr; gap: 20px; }
+
+        /* ================= البطاقات (Card) ================= */
+        .standard-card {
+            background: var(--card-bg); border: 1px solid var(--border-color);
+            border-radius: 12px; overflow: hidden;
+            display: flex; align-items: center;
+            transition: var(--transition-fast);
+            opacity: 0; transform: translateY(20px); cursor: pointer;
+        }
+        .standard-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--gold); box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            background: rgba(45, 45, 45, 0.9);
+        }
+        .card-img-box { width: 120px; min-width: 120px; height: 120px; flex-shrink: 0; overflow: hidden; position: relative; background: #222; }
+        .card-img-box img { transition: transform 0.4s ease; }
+        .standard-card:hover .card-img-box img { transform: scale(1.1); }
+
+        .card-body { padding: 15px; flex: 1; }
+        .card-title { font-family: var(--font-head-ar); font-size: 1.1rem; color: #fff; margin-bottom: 5px; }
+        .card-price { font-family: var(--font-head-en); font-size: 1rem; color: var(--gold); font-weight: 600; display: block; margin-bottom: 5px; }
+        .card-desc { font-size: 0.85rem; color: var(--text-muted); display: none; }
+        
+        /* ================= الأطباق المميزة (Featured) ================= */
+        .featured-row {
+            display: flex; align-items: center; gap: 30px; margin-bottom: 60px;
+            opacity: 0; transform: translateY(30px); transition: var(--transition-fast);
+            cursor: pointer;
+        }
+        .featured-row.reverse { flex-direction: row-reverse; }
+        .featured-img-box {
+            flex: 1; min-width: 250px; height: 300px; min-height: 250px;
+            border-radius: 12px; overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .featured-img-box img { transition: transform 0.5s ease; }
+        .featured-content { flex: 1; text-align: right; }
+        .featured-title { font-family: var(--font-head-ar); font-size: clamp(1.5rem, 4vw, 2.2rem); color: #fff; margin-bottom: 10px; }
+        .featured-price { font-family: var(--font-head-en); font-size: clamp(1.2rem, 3vw, 2rem); color: var(--gold); margin-bottom: 15px; display: block; }
+        .featured-desc { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 20px; }
+
+        /* ================= الفوتر الاحترافي (Footer) ================= */
+        footer {
+            background-color: #0a0a0a;
+            padding: 60px 20px 30px;
+            border-top: 1px solid var(--gold);
+            margin-top: 80px;
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .footer-brand {
+            font-family: var(--font-head-en);
+            font-size: 2.5rem;
+            color: var(--gold);
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .social-icons a {
+            color: var(--text-muted);
+            font-size: 1.5rem;
+            position: relative;
+        }
+
+        .social-icons a:hover {
+            color: var(--gold);
+            transform: translateY(-3px);
+        }
+
+        .designer-credit {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #222;
+        }
+        
+        .designer-link {
+            color: var(--gold);
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 5px;
+        }
+        .designer-link:hover { text-decoration: underline; }
+
+        /* ================= المودال (Modal) ================= */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(5px);
+            z-index: 2000; display: flex; justify-content: center; align-items: center;
+            opacity: 0; visibility: hidden; transition: opacity 0.3s ease;
+            padding: 20px;
+        }
+        .modal-overlay.active { opacity: 1; visibility: visible; }
+
+        .modal-content {
+            background: rgba(35, 35, 35, 0.98); border: 1px solid var(--gold);
+            width: 100%; max-width: 800px;
+            border-radius: 16px; overflow: hidden; box-shadow: 0 25px 50px rgba(0,0,0,0.6);
+            transform: scale(0.95); transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            max-height: 90vh; overflow-y: auto;
+        }
+        .modal-overlay.active .modal-content { transform: scale(1); }
+
+        .close-btn { position: absolute; top: 15px; right: 20px; font-size: 2rem; color: #fff; cursor: pointer; z-index: 10; }
+        
+        .modal-body { display: flex; flex-direction: column; }
+        .modal-img-container { flex: 1; min-height: 200px; height: 300px; overflow: hidden; background: #222; }
+        .modal-img-container img { width: 100%; height: 100%; object-fit: cover; }
+
+        .modal-info { flex: 1; padding: 30px; display: flex; flex-direction: column; justify-content: center; }
+        .modal-title { font-family: var(--font-head-ar); font-size: 1.8rem; color: #fff; margin-bottom: 10px; }
+        .modal-price { font-family: var(--font-head-en); font-size: 1.5rem; color: var(--gold); margin-bottom: 20px; }
+        .modal-desc { color: var(--text-muted); font-size: 1rem; margin-bottom: 10px; line-height: 1.8; }
+
+        .reveal { opacity: 1 !important; transform: translateY(0) !important; }
+
+        /* ================= استجابة الشاشات ================= */
+        @media (min-width: 768px) {
+            .menu-grid-cards { grid-template-columns: repeat(2, 1fr); }
+            .card-body { padding: 20px; }
+            .card-desc { display: block; }
+            .modal-body { flex-direction: row; }
+            .nav-links { gap: 30px; padding-bottom: 0; overflow: visible; }
+        }
+        @media (min-width: 1024px) {
+            .menu-grid-cards { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
+            .featured-img-box { height: 350px; }
+        }
+        @media (max-width: 480px) {
+            nav { padding: 10px 15px; }
+            .standard-card { flex-direction: column; text-align: center; }
+            .card-img-box { width: 100%; height: 180px; min-width: auto; border-bottom: 1px solid var(--border-color); }
+            .card-body { padding: 15px 10px; }
+            .featured-row, .featured-row.reverse { flex-direction: column; text-align: center; }
+            .featured-img-box { width: 100%; height: 220px; margin-bottom: 20px; }
+            .sub-section-title { justify-content: center; border-right: none; border-bottom: 3px solid var(--gold); padding-right: 0; padding-bottom: 5px; width: fit-content; margin: 30px auto 15px;}
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="bg-wrapper"><div class="bg-overlay"></div></div>
+
+    <!-- نافبار -->
+    <nav>
+        <div class="brand">Céleste</div>
+        <ul class="nav-links">
+            <li><a href="#starters">المقبلات</a></li>
+            <li><a href="#mains">الأطباق الرئيسية</a></li>
+            <li><a href="#hot-drinks">ساخنة</a></li>
+            <li><a href="#cold-drinks">باردة</a></li>
+        </ul>
+    </nav>
+
+    <!-- هيدر -->
+    <header>
+        <div>
+            <h1 class="hero-title">Céleste Dining</h1>
+            <h2 class="hero-sub">Where Flavor Meets Elegance</h2>
+        </div>
+    </header>
+
+    <main>
+        
+        <!-- قسم المقبلات -->
+        <section id="starters">
+            <div class="section-header reveal-on-scroll">
+                <h2 class="section-title">المقبلات</h2>
+            </div>
+            <div class="menu-grid-cards">
+                <!-- 1. بروشيتا (تم التعديل لاستخدام الصورة المحلية) -->
+                <div class="standard-card reveal-on-scroll" data-title="بروشيتا" data-price="8.5 د.ل" data-img="./preee/بروشيتا.jpg" data-desc="خبز إيطالي محمص مع طماطم كرزية ناضجة، ريحان طازج، ورذاذ من زيت الزيتون البكر الممتاز.">
+                    <div class="card-img-box">
+                        <!-- تم التعديل هنا -->
+                        <img src="https://i.pinimg.com/1200x/56/80/eb/5680eb88da23c255c22f7d9d21200d9f.jpg" alt="بروشيتا">
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">بروشيتا</h3>
+                        <span class="card-price">8.5 د.ل</span>
+                    </div>
+                </div>
+                <!-- 2. كالاماري -->
+                <div class="standard-card reveal-on-scroll" data-title="كالاماري مقلي" data-price="16.0 د.ل" data-img="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?auto=format&fit=crop&w=800&v=2" data-desc="حلقات الحبار الطازجة المتبلة، مقلية حتى تصبح ذهبية ومقرمشة، تقدم مع صوص الترتار والليمون.">
+                    <div class="card-img-box">
+                        <img src="https://i.pinimg.com/736x/e7/a0/4f/e7a04f5ae1da4d3830ad89eac9ba7350.jpg" alt="كالاماري">
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">كالاماري مقلي</h3>
+                        <span class="card-price">16.0 د.ل</span>
+                    </div>
+                </div>
+                <!-- 3. موزاريلا -->
+                <div class="standard-card reveal-on-scroll" data-title="موزاريلا كابريزي" data-price="9.0 د.ل" data-img="https://images.unsplash.com/photo-1599060980654-b9c452197a02?auto=format&fit=crop&w=800&v=2" data-desc="شرائح جبنة الموزاريلا الطازجة البيضاء، شرائح طماطم حمراء، أوراق الريحان الخضراء.">
+                    <div class="card-img-box">
+                        <img src="https://i.pinimg.com/736x/c8/b5/e4/c8b5e4a0f6d9cf812f114669ecdc53af.jpg" alt="موزاريلا">
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">موزاريلا كابريزي</h3>
+                        <span class="card-price">9.0 د.ل</span>
+                    </div>
+                </div>
+                <!-- سلطة سيزر -->
+                <div class="standard-card reveal-on-scroll" data-title="سلطة سيزر" data-price="14.0 د.ل" data-img="https://images.unsplash.com/photo-1550304943-4f24f54ddde9?auto=format&fit=crop&w=800" data-desc="أوراق خس رومانية مقرمشة تقدم مع قطع الدجاج المشوي المتبل، صوص السيزر الكلاسيكي الغني، ورقائق جبن البارميزان.">
+                    <div class="card-img-box">
+                        <img src="https://images.unsplash.com/photo-1550304943-4f24f54ddde9?auto=format&fit=crop&w=300" alt="سلطة">
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">سلطة سيزر</h3>
+                        <span class="card-price">14.0 د.ل</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- قسم الأطباق الرئيسية -->
+        <section id="mains">
+            <div class="section-header reveal-on-scroll">
+                <h2 class="section-title">الأطباق الرئيسية</h2>
+            </div>
+
+            <div class="featured-row reveal-on-scroll" data-title="بيتزا تريفيلا" data-price="20.0 د.ل" data-img="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=800" data-desc="عجينة إيطالية رقيقة جداً تُخبز في فرن خشبي، مغطاة بصلصة الطماطم السان مارزانو، جبنة الموزاريلا، الفطر الطازج، وحبات الرمان الحمراء المقرمشة.">
+                <div class="featured-img-box"><img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=800" alt="بيتزا"></div>
+                <div class="featured-content">
+                    <h3 class="featured-title">بيتزا تريفيلا</h3>
+                    <span class="featured-price">20.0 د.ل</span>
+                    <p class="featured-desc">عجينة رقيقة جداً، موزاريلا، فطر طازج، ورمان.</p>
+                </div>
+            </div>
+
+            <div class="featured-row reverse reveal-on-scroll" data-title="لازانيا بولونيز" data-price="24.0 د.ل" data-img="https://images.unsplash.com/photo-1574894709920-11b28e7367e3?auto=format&fit=crop&w=800" data-desc="طبقات عديدة من المكرونة مع اللحم المفروم الغني بالصلصة والجبنة المخبوزة حتى الذوبان.">
+                <div class="featured-img-box"><img src="https://images.unsplash.com/photo-1574894709920-11b28e7367e3?auto=format&fit=crop&w=800" alt="لازانيا"></div>
+                <div class="featured-content">
+                    <h3 class="featured-title">لازانيا بولونيز</h3>
+                    <span class="featured-price">24.0 د.ل</span>
+                    <p class="featured-desc">مكرونة، لحم مفروم، صوص طماطم، جبنة.</p>
+                </div>
+            </div>
+
+            <div class="featured-row reveal-on-scroll" data-title="ستيك ريش" data-price="45.0 د.ل" data-img="https://images.unsplash.com/photo-1600891964092-4316c288032e?auto=format&fit=crop&w=800" data-desc="شريحة لحم الريش المخلية بعناية، تُشوى على الفحم للحصول على نكهة مدخنة، تقدم مع صوص الفلفل الأسود والخضار السوتيه.">
+                <div class="featured-img-box"><img src="https://images.unsplash.com/photo-1600891964092-4316c288032e?auto=format&fit=crop&w=800" alt="ستيك"></div>
+                <div class="featured-content">
+                    <h3 class="featured-title">ريش ستايك</h3>
+                    <span class="featured-price">45.0 د.ل</span>
+                    <p class="featured-desc">لحم مخلي، صوص فلفل، خضار.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- قسم المشروبات -->
+        <section id="drinks">
+            <div class="section-header">
+                <h2 class="section-title">المشروبات</h2>
+            </div>
+
+            <div id="hot-drinks">
+                <h3 class="sub-section-title reveal-on-scroll"><i class="fa-solid fa-mug-hot"></i> ساخنة</h3>
+                <div class="menu-grid-cards">
+                    <div class="standard-card reveal-on-scroll" data-title="إسبريسو" data-price="4.0 د.ل" data-img="https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?auto=format&fit=crop&w=800" data-desc="جرعة قوية ومركزة من القهوة الإيطالية.">
+                        <div class="card-img-box"><img src="https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?auto=format&fit=crop&w=300" alt="اسبريسو"></div>
+                        <div class="card-body"><h3 class="card-title">إسبريسو</h3><span class="card-price">4.0 د.ل</span></div>
+                    </div>
+                    <div class="standard-card reveal-on-scroll" data-title="كابتشينو" data-price="5.5 د.ل" data-img="https://images.unsplash.com/photo-1572442388796-11668a67e53d?auto=format&fit=crop&w=800" data-desc="إسبريسو مع كمية متساوية من الحليب المبخر والرغوة.">
+                        <div class="card-img-box"><img src="https://images.unsplash.com/photo-1572442388796-11668a67e53d?auto=format&fit=crop&w=300" alt="كابتشينو"></div>
+                        <div class="card-body"><h3 class="card-title">كابتشينو</h3><span class="card-price">5.5 د.ل</span></div>
+                    </div>
+                    <div class="standard-card reveal-on-scroll" data-title="شاي أخضر" data-price="3.0 د.ل" data-img="https://images.unsplash.com/photo-1556881286-fc6915169721?auto=format&fit=crop&w=800" data-desc="أوراق الشاي الأخضر اليابانية المنعشة.">
+                        <div class="card-img-box"><img src="https://i.pinimg.com/736x/b2/12/6f/b2126fc1614c5e2caa3717e9797085d6.jpg" alt="شاي"></div>
+                        <div class="card-body"><h3 class="card-title">شاي أخضر</h3><span class="card-price">3.0 د.ل</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="cold-drinks">
+                <h3 class="sub-section-title reveal-on-scroll"><i class="fa-solid fa-glass-water"></i> باردة</h3>
+                <div class="menu-grid-cards">
+                    <div class="standard-card reveal-on-scroll" data-title="آيس لاتيه" data-price="7.0 د.ل" data-img="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=800" data-desc="قهوة مثلجة مع الحليب والثلج.">
+                        <div class="card-img-box"><img src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=300" alt="آيس"></div>
+                        <div class="card-body"><h3 class="card-title">آيس لاتيه</h3><span class="card-price">7.0 د.ل</span></div>
+                    </div>
+                    <div class="standard-card reveal-on-scroll" data-title="موهيتو" data-price="8.0 د.ل" data-img="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=800" data-desc="نعناع، ليمون، صودا، ثلج.">
+                        <div class="card-img-box"><img src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=300" alt="موهيتو"></div>
+                        <div class="card-body"><h3 class="card-title">موهيتو</h3><span class="card-price">8.0 د.ل</span></div>
+                    </div>
+                    <div class="standard-card reveal-on-scroll" data-title="عصير برتقال" data-price="6.0 د.ل" data-img="https://images.unsplash.com/photo-1613478223719-2ab802602423?auto=format&fit=crop&w=800" data-desc="عصير برتقال طازج 100%.">
+                        <div class="card-img-box"><img src="https://images.unsplash.com/photo-1613478223719-2ab802602423?auto=format&fit=crop&w=300" alt="عصير"></div>
+                        <div class="card-body"><h3 class="card-title">عصير برتقال</h3><span class="card-price">6.0 د.ل</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- الفوتر الاحترافي -->
+    <footer>
+   
+            </div>
+            <div class="designer-credit">
+                <p>&copy; 2023 جميع الحقوق محفوظة لـ Céleste Dining</p>
+                <!-- رابط صفحتك على الفيسبوك -->
+                <a href="https://www.facebook.com/your-ux-page-id" target="_blank" class="designer-link">
+                    <i class="fa-brands fa-facebook"></i> UX/UI Designer
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- المودال -->
+    <div class="modal-overlay" id="itemModal">
+        <div class="modal-content">
+            <span class="close-btn" id="closeModal">&times;</span>
+            <div class="modal-body">
+                <div class="modal-img-container"><img id="modalImg" src="" alt=""></div>
+                <div class="modal-info">
+                    <h2 class="modal-title" id="modalTitle"></h2>
+                    <span class="modal-price" id="modalPrice"></span>
+                    <p class="modal-desc" id="modalDesc"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            
+            // 1. معالجة الصور
+            document.querySelectorAll('img').forEach(img => {
+                img.onerror = function() {
+                    this.src = 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=300'; 
+                    this.alt = "صورة غير متوفرة";
+                };
+            });
+
+            // 2. أنيميشن التمرير
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('reveal');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            const elements = document.querySelectorAll('.reveal-on-scroll');
+            elements.forEach((el, index) => {
+                el.style.transitionDelay = `${index * 50}ms`; 
+                observer.observe(el);
+            });
+
+            // 3. منطق المودال
+            const modal = document.getElementById('itemModal');
+            const closeModalBtn = document.getElementById('closeModal');
+            const mImg = document.getElementById('modalImg');
+            const mTitle = document.getElementById('modalTitle');
+            const mPrice = document.getElementById('modalPrice');
+            const mDesc = document.getElementById('modalDesc');
+
+            const clickableItems = document.querySelectorAll('.standard-card, .featured-row');
+
+            clickableItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    const title = this.getAttribute('data-title');
+                    const price = this.getAttribute('data-price');
+                    const img = this.getAttribute('data-img');
+                    const desc = this.getAttribute('data-desc');
+
+                    mTitle.textContent = title;
+                    mPrice.textContent = price;
+                    mDesc.textContent = desc;
+                    mImg.src = img;
+
+                    modal.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+
+            function closeModal() {
+                modal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+
+            closeModalBtn.addEventListener('click', closeModal);
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) closeModal();
+            });
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && modal.classList.contains('active')) closeModal();
+            });
+        });
+    </script>
+</body>
+</html>
